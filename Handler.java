@@ -1,3 +1,5 @@
+package server;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -33,7 +35,7 @@ public class Handler extends DefaultHandler {
             if(tag.equals("servlet")){
                 entity=new Entity();
             }
-            if(tag.equals("mapping")){
+            if(tag.equals("servlet-mapping")){
                 mapping=new Mapping();
                 isMapping=true;
             }
@@ -51,9 +53,9 @@ public class Handler extends DefaultHandler {
                     entity.setClz(contents);
                 }
             }else{
-                if(tag.equals("name")){
+                if(tag.equals("servlet-name")){
                     mapping.setName(contents);
-                }else if(tag.equals("pattern")){
+                }else if(tag.equals("url-pattern")){
                     mapping.addPatterns(contents);
                 }
             }
@@ -62,10 +64,10 @@ public class Handler extends DefaultHandler {
 
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if(null!=tag){
+        if(null!=qName){
             if(qName.equals("servlet")){
                 entities.add(entity);
-            }else if(qName.equals("mapping")){
+            }else if(qName.equals("servlet-mapping")){
                 mappings.add(mapping);
             }
         }

@@ -1,3 +1,8 @@
+package server;
+
+import server.Entity;
+import server.Mapping;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
